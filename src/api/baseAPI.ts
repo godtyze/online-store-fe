@@ -37,7 +37,7 @@ const baseQueryWithReauth: BaseQueryFn<
 
 export const baseAPI = createApi({
   refetchOnFocus: true,
-  tagTypes: ['Device', 'Type', 'Brand', 'DeviceInfo'],
+  tagTypes: ['Device', 'Type', 'Brand'],
   baseQuery: baseQueryWithReauth,
   endpoints: builder => ({})
 });

@@ -11,7 +11,12 @@ export const deviceAPI = baseAPI.injectEndpoints({
           ...params
         }
       }),
-      providesTags: ['Device']
+      providesTags: (result) => result
+        ? [
+          ...result.map(({id}) => ({type: 'Device' as const, id})),
+          {type: 'Device', id: 'LIST'}
+          ]
+        : [{type: 'Device', id: 'LIST'}]
     }),
     getOneDevice: builder.query<IDevice, number>({
       query: (id) => ({
@@ -23,20 +28,23 @@ export const deviceAPI = baseAPI.injectEndpoints({
         url: `${API_ROUTES.device}`,
         method: 'POST',
         body: device
-      })
+      }),
+      invalidatesTags: [{type: 'Device', id: 'LIST'}]
     }),
     updateDevice: builder.mutation<object, UpdateDeviceRequest>({
       query: (updated) => ({
         url: `${API_ROUTES.device}/${updated.deviceId}`,
         method: 'PUT',
         body: updated
-      })
+      }),
+      invalidatesTags: [{type: 'Device', id: 'LIST'}]
     }),
     deleteDevice: builder.mutation<object, number>({
       query: (id) => ({
         url: `${API_ROUTES.device}/${id}`,
         method: 'DELETE'
-      })
+      }),
+      invalidatesTags: [{type: 'Device', id: 'LIST'}]
     }),
     createDeviceInfo: builder.mutation<IDevice, Omit<UpdateDeviceRequest, 'name' | 'price'>>({
       query: (device) => ({
