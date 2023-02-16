@@ -1,5 +1,5 @@
 import {baseAPI} from './baseAPI';
-import {AuthRequest, AuthResponse} from '../types';
+import {AuthRequest, AuthResponse} from '../types/auth';
 import {API_ROUTES} from '../config';
 
 export const userAPI = baseAPI.injectEndpoints({

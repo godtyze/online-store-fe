@@ -2,7 +2,7 @@ import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} 
 import {setCredentials, logOut} from '../store/slices/userSlice';
 import {API_ROUTES, BASE_API_URL} from '../config';
 import {RootState} from '../store';
-import {AuthResponse} from '../types';
+import {AuthResponse} from '../types/auth';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_API_URL,
@@ -36,6 +36,8 @@ const baseQueryWithReauth: BaseQueryFn<
 };
 
 export const baseAPI = createApi({
+  refetchOnFocus: true,
+  tagTypes: ['Device', 'Type', 'Brand', 'DeviceInfo'],
   baseQuery: baseQueryWithReauth,
   endpoints: builder => ({})
 });

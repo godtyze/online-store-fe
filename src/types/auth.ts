@@ -4,7 +4,7 @@ export type AuthResponse = {
   user: IUser;
 }
 
-export type AuthRequest = Record<'email' | 'password', string>;
+export type AuthRequest = Record<'email' | 'password', string>
 
 export type IUser = {
   email: string;

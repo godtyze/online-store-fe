@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {AuthResponse, UserState} from '../../types';
+import {AuthResponse, UserState} from '../../types/auth';
 import {RootState} from '../index';
 
 const initialState: UserState = {
@@ -15,10 +15,12 @@ const userSlice = createSlice({
       const { user, accessToken } = action.payload;
       state.user = user;
       state.accessToken = accessToken;
+      localStorage.setItem('token', accessToken);
     },
     logOut: (state) => {
       state.user = null;
       state.accessToken = '';
+      localStorage.removeItem('token');
     }
   }
 });
