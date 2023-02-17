@@ -1,4 +1,4 @@
-export type IBrand = {
+export interface IBrand {
   id: number;
   name: string;
 }

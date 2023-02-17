@@ -1,4 +1,4 @@
-export type AuthResponse = {
+export interface AuthResponse {
   accessToken: string;
   refreshToken: string;
   user: IUser;
@@ -6,17 +6,17 @@ export type AuthResponse = {
 
 export type AuthRequest = Record<'email' | 'password', string>
 
-export type IUser = {
+export interface IUser {
   email: string;
   id: number;
   role: string;
 }
 
-export type UserState = {
+export interface UserState {
   accessToken: string;
   user: IUser | null;
 }
 
-export type CRUDResponse = {
+export interface CRUDResponse {
   message: string;
 }

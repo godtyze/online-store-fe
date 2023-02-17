@@ -1,4 +1,4 @@
-export type IDevice = {
+export interface IDevice {
   id: number;
   name: string;
   price: number;
@@ -8,13 +8,13 @@ export type IDevice = {
   brandId: number;
 }
 
-export type DeviceInfo = {
+export interface DeviceInfo {
   title: string;
   description: string;
   deviceId?: number;
 }
 
-export type GetDevicesRequest = {
+export interface GetDevicesRequest {
   brandId: number;
   typeId: number;
   query: string;
@@ -22,7 +22,7 @@ export type GetDevicesRequest = {
   page: number;
 }
 
-export type UpdateDeviceRequest = {
+export interface UpdateDeviceRequest {
   info: DeviceInfo[],
   name: string;
   price: string;
