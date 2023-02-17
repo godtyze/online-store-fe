@@ -16,3 +16,7 @@ export type UserState = {
   accessToken: string;
   user: IUser | null;
 }
+
+export type CRUDResponse = {
+  message: string;
+}

@@ -1,6 +1,7 @@
 import {baseAPI} from './baseAPI';
 import {GetDevicesRequest, IDevice, UpdateDeviceRequest} from '../types/device';
 import {API_ROUTES} from '../config';
+import {CRUDResponse} from '../types/auth';
 
 export const deviceAPI = baseAPI.injectEndpoints({
   endpoints: builder => ({
@@ -31,7 +32,7 @@ export const deviceAPI = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [{type: 'Device', id: 'LIST'}]
     }),
-    updateDevice: builder.mutation<object, UpdateDeviceRequest>({
+    updateDevice: builder.mutation<CRUDResponse, UpdateDeviceRequest>({
       query: (updated) => ({
         url: `${API_ROUTES.device}/${updated.deviceId}`,
         method: 'PUT',
@@ -39,14 +40,14 @@ export const deviceAPI = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [{type: 'Device', id: 'LIST'}]
     }),
-    deleteDevice: builder.mutation<object, number>({
+    deleteDevice: builder.mutation<CRUDResponse, number>({
       query: (id) => ({
         url: `${API_ROUTES.device}/${id}`,
         method: 'DELETE'
       }),
       invalidatesTags: [{type: 'Device', id: 'LIST'}]
     }),
-    createDeviceInfo: builder.mutation<IDevice, Omit<UpdateDeviceRequest, 'name' | 'price'>>({
+    createDeviceInfo: builder.mutation<CRUDResponse, Omit<UpdateDeviceRequest, 'name' | 'price'>>({
       query: (device) => ({
         url: `${API_ROUTES.device}/${device.deviceId}`,
         method: 'POST',
