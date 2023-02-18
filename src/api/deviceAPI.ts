@@ -1,11 +1,11 @@
 import {baseAPI} from './baseAPI';
-import {GetDevicesRequest, IDevice, UpdateDeviceRequest} from '../types/device';
+import {GetDevicesRequest, GetDevicesResponse, IDevice, UpdateDeviceRequest} from '../types/device';
 import {API_ROUTES} from '../config';
-import {CRUDResponse} from '../types/auth';
+import {CRUDResponse} from '../types/user';
 
 export const deviceAPI = baseAPI.injectEndpoints({
   endpoints: builder => ({
-    getAllDevices: builder.query<IDevice[], Partial<GetDevicesRequest>>({
+    getAllDevices: builder.query<GetDevicesResponse, Partial<GetDevicesRequest>>({
       query: (params) => ({
         url: `${API_ROUTES.device}`,
         params: {
@@ -14,7 +14,7 @@ export const deviceAPI = baseAPI.injectEndpoints({
       }),
       providesTags: (result) => result
         ? [
-          ...result.map(({id}) => ({type: 'Device' as const, id})),
+          ...result.rows.map(({id}) => ({type: 'Device' as const, id})),
           {type: 'Device', id: 'LIST'}
           ]
         : [{type: 'Device', id: 'LIST'}]

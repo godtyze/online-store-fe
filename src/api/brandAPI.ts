@@ -1,7 +1,7 @@
 import {baseAPI} from './baseAPI';
 import {API_ROUTES} from '../config';
 import {IBrand} from '../types/brand';
-import {CRUDResponse} from '../types/auth';
+import {CRUDResponse} from '../types/user';
 
 export const brandAPI = baseAPI.injectEndpoints({
   endpoints: builder => ({

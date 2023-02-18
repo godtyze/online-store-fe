@@ -20,3 +20,6 @@ export interface UserState {
 export interface CRUDResponse {
   message: string;
 }
+
+export type DeviceToBasketRequest = Record<'userId' | 'deviceId', number>
+

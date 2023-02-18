@@ -1,6 +1,7 @@
 import {baseAPI} from './baseAPI';
-import {AuthRequest, AuthResponse} from '../types/auth';
+import {DeviceToBasketRequest, AuthRequest, AuthResponse} from '../types/user';
 import {API_ROUTES} from '../config';
+import {GetDevicesResponse} from '../types/device';
 
 export const userAPI = baseAPI.injectEndpoints({
   endpoints: builder => ({
@@ -24,10 +25,28 @@ export const userAPI = baseAPI.injectEndpoints({
         method: 'POST'
       })
     }),
-    refresh: builder.query({
+    refresh: builder.query<AuthResponse, undefined>({
       query: () => ({
-        url: `${API_ROUTES.user}/refresh`,
-        method: 'get'
+        url: `${API_ROUTES.user}/refresh`
+      })
+    }),
+    getBasketDevices: builder.query<GetDevicesResponse, number>({
+      query: (userId) => ({
+        url: `${API_ROUTES.user}/${userId}/basket`,
+      })
+    }),
+    addDeviceToBasket: builder.mutation<AuthResponse, DeviceToBasketRequest>({
+      query: (req) => ({
+        url: `${API_ROUTES.user}/${req.userId}/basket`,
+        method: 'POST',
+        body: { deviceId: req.deviceId }
+      })
+    }),
+    deleteDeviceFromBasket: builder.mutation<AuthResponse, DeviceToBasketRequest>({
+      query: (req) => ({
+        url: `${API_ROUTES.user}/${req.userId}/basket`,
+        method: 'DELETE',
+        body: { deviceId: req.deviceId }
       })
     })
   })
@@ -37,5 +56,8 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,
-  useLazyRefreshQuery
+  useLazyRefreshQuery,
+  useGetBasketDevicesQuery,
+  useAddDeviceToBasketMutation,
+  useDeleteDeviceFromBasketMutation
 } = userAPI;

@@ -6,6 +6,7 @@ export interface IDevice {
   img: string;
   typeId: number;
   brandId: number;
+  info?: DeviceInfo[];
 }
 
 export interface DeviceInfo {
@@ -20,6 +21,11 @@ export interface GetDevicesRequest {
   query: string;
   limit: number;
   page: number;
+}
+
+export interface GetDevicesResponse {
+  count: number;
+  rows: IDevice[];
 }
 
 export interface UpdateDeviceRequest {

@@ -2,7 +2,7 @@ import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} 
 import {setCredentials, logOut} from '../store/slices/userSlice';
 import {API_ROUTES, BASE_API_URL} from '../config';
 import {RootState} from '../store';
-import {AuthResponse} from '../types/auth';
+import {AuthResponse} from '../types/user';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_API_URL,
@@ -24,12 +24,12 @@ const baseQueryWithReauth: BaseQueryFn<
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
   if (result.error && result.error.status === 401) {
-    const refreshResult = await baseQuery(`${API_ROUTES.user}/refresh`, api, extraOptions);
+    const refreshResult = await baseQuery({ url: `${API_ROUTES.user}/refresh`, method: 'GET' }, api, extraOptions);
     if (refreshResult.data) {
       api.dispatch(setCredentials(refreshResult.data as AuthResponse));
       result = await baseQuery(args, api, extraOptions)
     } else {
-      api.dispatch(logOut())
+      api.dispatch(logOut());
     }
   }
   return result;
