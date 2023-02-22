@@ -2,7 +2,7 @@ import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} 
 import {setCredentials, logOut} from '../store/slices/userSlice';
 import {API_ROUTES, BASE_API_URL} from '../config';
 import {RootState} from '../store';
-import {AuthResponse} from '../types/user';
+import {AuthResponse} from '../models/user';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_API_URL,

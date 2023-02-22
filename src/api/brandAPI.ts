@@ -1,13 +1,13 @@
 import {baseAPI} from './baseAPI';
 import {API_ROUTES} from '../config';
-import {IBrand} from '../types/brand';
-import {CRUDResponse} from '../types/user';
+import {IBrand} from '../models/brand';
+import {CRUDResponse} from '../models/user';
 
 export const brandAPI = baseAPI.injectEndpoints({
   endpoints: builder => ({
     getAllBrands: builder.query<IBrand[], undefined>({
       query: () => ({
-        url: `${API_ROUTES.brand}`
+        url: API_ROUTES.brand
       }),
       providesTags: (result) => result
         ? [
@@ -18,7 +18,7 @@ export const brandAPI = baseAPI.injectEndpoints({
     }),
     createBrand: builder.mutation<IBrand, string>({
       query: (brandName) => ({
-        url: `${API_ROUTES.brand}`,
+        url: API_ROUTES.brand,
         method: 'POST',
         body: { name: brandName }
       }),
@@ -26,7 +26,7 @@ export const brandAPI = baseAPI.injectEndpoints({
     }),
     deleteBrand: builder.mutation<CRUDResponse, string>({
       query: (brandName) => ({
-        url: `${API_ROUTES.brand}`,
+        url: API_ROUTES.brand,
         method: 'DELETE',
         body: { name: brandName }
       }),

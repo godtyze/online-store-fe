@@ -1,12 +1,12 @@
 import {baseAPI} from './baseAPI';
 import {API_ROUTES} from '../config';
-import {IType} from '../types/type';
+import {IType} from '../models/type';
 
 export const typeAPI = baseAPI.injectEndpoints({
   endpoints: builder => ({
     getAllTypes: builder.query<IType[], undefined>({
       query: () => ({
-        url: `${API_ROUTES.type}`
+        url: API_ROUTES.type
       }),
       providesTags: (result) => result
         ? [
@@ -17,7 +17,7 @@ export const typeAPI = baseAPI.injectEndpoints({
     }),
     createType: builder.mutation<IType, string>({
       query: (typeName) => ({
-        url: `${API_ROUTES.type}`,
+        url: API_ROUTES.type,
         method: 'POST',
         body: { name: typeName }
       }),
@@ -25,7 +25,7 @@ export const typeAPI = baseAPI.injectEndpoints({
     }),
     deleteType: builder.mutation<object, string>({
       query: (typeName) => ({
-        url: `${API_ROUTES.type}`,
+        url: API_ROUTES.type,
         method: 'DELETE',
         body: { name: typeName }
       }),
