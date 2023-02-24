@@ -16,19 +16,26 @@ export const brandAPI = baseAPI.injectEndpoints({
         ]
         : [{type: 'Brand', id: 'LIST'}]
     }),
-    createBrand: builder.mutation<IBrand, string>({
-      query: (brandName) => ({
+    createBrand: builder.mutation<IBrand, Omit<IBrand, 'id'>>({
+      query: (brand) => ({
         url: API_ROUTES.brand,
         method: 'POST',
-        body: { name: brandName }
+        body: { name: brand.name, typeId: brand.typeId }
       }),
       invalidatesTags: [{type: 'Brand', id: 'LIST'}]
     }),
-    deleteBrand: builder.mutation<CRUDResponse, string>({
-      query: (brandName) => ({
-        url: API_ROUTES.brand,
-        method: 'DELETE',
-        body: { name: brandName }
+    updateBrand: builder.mutation<CRUDResponse, IBrand>({
+      query: (brand) => ({
+        url: `${API_ROUTES.brand}/${brand.id}`,
+        method: 'PUT',
+        body: { typeId: brand.typeId }
+      }),
+      invalidatesTags: [{type: 'Brand', id: 'LIST'}]
+    }),
+    deleteBrand: builder.mutation<CRUDResponse, number>({
+      query: (id) => ({
+        url: `${API_ROUTES.brand}/${id}`,
+        method: 'DELETE'
       }),
       invalidatesTags: [{type: 'Brand', id: 'LIST'}]
     })
@@ -38,5 +45,6 @@ export const brandAPI = baseAPI.injectEndpoints({
 export const {
   useGetAllBrandsQuery,
   useCreateBrandMutation,
+  useUpdateBrandMutation,
   useDeleteBrandMutation
 } = brandAPI;

@@ -23,11 +23,18 @@ export const typeAPI = baseAPI.injectEndpoints({
       }),
       invalidatesTags: [{type: 'Type', id: 'LIST'}]
     }),
-    deleteType: builder.mutation<object, string>({
-      query: (typeName) => ({
-        url: API_ROUTES.type,
-        method: 'DELETE',
-        body: { name: typeName }
+    updateType: builder.mutation<object, Omit<IType, 'childBrands'>>({
+      query: (type) => ({
+        url: `${API_ROUTES.type}/${type.id}`,
+        method: 'PUT',
+        body: { name: type.name }
+      }),
+      invalidatesTags: [{type: 'Type', id: 'LIST'}]
+    }),
+    deleteType: builder.mutation<object, number>({
+      query: (id) => ({
+        url: `${API_ROUTES.type}/${id}`,
+        method: 'DELETE'
       }),
       invalidatesTags: [{type: 'Type', id: 'LIST'}]
     })
@@ -37,5 +44,6 @@ export const typeAPI = baseAPI.injectEndpoints({
 export const {
   useGetAllTypesQuery,
   useCreateTypeMutation,
+  useUpdateTypeMutation,
   useDeleteTypeMutation
 } = typeAPI;
