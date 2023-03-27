@@ -1,7 +1,7 @@
 import {baseAPI} from './baseAPI';
-import {DeviceToBasketRequest, AuthRequest, AuthResponse} from '../models/user';
-import {API_ROUTES} from '../config';
-import {GetDevicesResponse} from '../models/device';
+import {DeviceToBasketRequest, AuthRequest, AuthResponse} from '@/models/user';
+import {API_ROUTES} from '@/config';
+import {GetDevicesResponse} from '@/models/device';
 
 export const userAPI = baseAPI.injectEndpoints({
   endpoints: builder => ({

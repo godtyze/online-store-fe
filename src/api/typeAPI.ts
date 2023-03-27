@@ -1,6 +1,6 @@
 import {baseAPI} from './baseAPI';
-import {API_ROUTES} from '../config';
-import {IType} from '../models/type';
+import {API_ROUTES} from '@/config';
+import {IType} from '@/models/type';
 
 export const typeAPI = baseAPI.injectEndpoints({
   endpoints: builder => ({

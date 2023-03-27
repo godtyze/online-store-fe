@@ -1,16 +1,14 @@
 import {baseAPI} from './baseAPI';
-import {GetDevicesRequest, GetDevicesResponse, IDevice, UpdateDeviceRequest} from '../models/device';
-import {API_ROUTES} from '../config';
-import {CRUDResponse} from '../models/user';
+import {GetDevicesRequest, GetDevicesResponse, IDevice, UpdateDeviceRequest} from '@/models/device';
+import {API_ROUTES} from '@/config';
+import {CRUDResponse} from '@/models/user';
 
 export const deviceAPI = baseAPI.injectEndpoints({
   endpoints: builder => ({
     getAllDevices: builder.query<GetDevicesResponse, Partial<GetDevicesRequest>>({
       query: (params) => ({
         url: API_ROUTES.device,
-        params: {
-          ...params
-        }
+        params: params
       }),
       providesTags: (result) => result
         ? [
@@ -22,6 +20,12 @@ export const deviceAPI = baseAPI.injectEndpoints({
     getOneDevice: builder.query<IDevice, number>({
       query: (id) => ({
         url: `${API_ROUTES.device}/${id}`
+      })
+    }),
+    searchDevices: builder.query<GetDevicesResponse,  Partial<GetDevicesRequest>>({
+      query: (params) => ({
+        url: API_ROUTES.device,
+        params: params
       })
     }),
     createDevice: builder.mutation<IDevice, FormData>({
@@ -60,6 +64,8 @@ export const deviceAPI = baseAPI.injectEndpoints({
 export const {
   useGetAllDevicesQuery,
   useLazyGetAllDevicesQuery,
+  useSearchDevicesQuery,
+  useLazySearchDevicesQuery,
   useGetOneDeviceQuery,
   useCreateDeviceMutation,
   useUpdateDeviceMutation,

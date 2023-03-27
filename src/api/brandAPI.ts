@@ -1,7 +1,7 @@
 import {baseAPI} from './baseAPI';
-import {API_ROUTES} from '../config';
-import {IBrand} from '../models/brand';
-import {CRUDResponse} from '../models/user';
+import {API_ROUTES} from '@/config';
+import {IBrand} from '@/models/brand';
+import {CRUDResponse} from '@/models/user';
 
 export const brandAPI = baseAPI.injectEndpoints({
   endpoints: builder => ({
