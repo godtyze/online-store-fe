@@ -1,10 +1,16 @@
 import React from 'react';
+import {Layout} from 'antd';
+import type { SiderTheme } from 'antd/es/layout/Sider';
 
-const SideMenu: React.FC = () => {
+interface SideMenuProps {
+  theme?: SiderTheme
+}
+
+const SideMenu: React.FC<SideMenuProps> = ({ theme }) => {
   return (
-    <div>
-
-    </div>
+    <Layout.Sider theme={theme}>
+      Sider
+    </Layout.Sider>
   );
 };
 

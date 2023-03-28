@@ -1,0 +1,7 @@
+@use '../variables' as v;
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  border-top: v.$border;
+}

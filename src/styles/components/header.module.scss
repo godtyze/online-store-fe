@@ -1,0 +1,7 @@
+@use '../variables' as v;
+
+.header {
+  display: flex;
+  border-bottom: v.$border;
+  padding: 10px;
+}

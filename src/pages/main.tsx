@@ -1,10 +1,11 @@
 import React from 'react';
 import {Layout} from 'antd';
+import SideMenu from '@/components/side-menu';
 
 const Main: React.FC = () => {
   return (
     <Layout>
-      <Layout.Sider>Sider</Layout.Sider>
+      <SideMenu theme='light'/>
       <Layout.Content>Content</Layout.Content>
     </Layout>
   );
