@@ -14,3 +14,7 @@ export function isApiError(error: unknown): error is ApiErrorResponse {
     'message' in error.data &&
     typeof error.data.message === 'string';
 }
+
+export function getErrorMessage(error: unknown): string | null {
+  return isApiError(error) ? error.data.message : null;
+}

@@ -9,10 +9,10 @@ export const enum API_ROUTES {
 
 export const enum CLIENT_ROUTES {
   main = '/',
-  registration = 'registration',
-  login = 'login',
-  device = 'device/:id',
-  profile = 'profile',
-  cart = 'cart',
+  registration = '/registration',
+  login = '/login',
+  device = '/device/:id',
+  profile = '/profile',
+  cart = '/cart',
   notFound = '*'
 }
