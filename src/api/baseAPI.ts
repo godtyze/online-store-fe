@@ -10,7 +10,7 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers: Headers, api) => {
     const token = (api.getState() as RootState).userReducer.accessToken;
     if (token) {
-      headers.set('authorization', token);
+      headers.set('authorization', 'Bearer ' + token);
     }
 
     return headers;

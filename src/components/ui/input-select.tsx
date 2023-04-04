@@ -1,38 +1,33 @@
 import React from 'react';
 import {AutoComplete, Spin} from 'antd';
 import cn from 'classnames';
+import {SelectOptions} from '@/models';
 import styles from '@/styles/ui/input-select.module.scss';
 
-interface Options {
-  key: string;
-  label: React.ReactNode | string;
-}
-
 interface InputSelectProps {
-  value: string;
   placeholder?: string;
   disabled?: boolean;
 
   isLoading?: boolean;
-  options?: Options[];
+  options?: SelectOptions[];
   onSearch: (value: string) => void;
+  onSelect?: (option: SelectOptions) => void;
   className?: string;
 }
 
 const InputSelect: React.FC<InputSelectProps> = ({
-                                                   value,
                                                    placeholder,
                                                    disabled,
                                                    isLoading,
                                                    options,
                                                    onSearch,
+                                                   onSelect,
                                                    className
                                                  }) => {
   const classes = cn(styles.select, className);
 
   return (
     <AutoComplete
-      value={value}
       placeholder={placeholder}
       disabled={disabled}
       notFoundContent={isLoading ? <Spin size="small"/> : 'Ничего не найдено'}
@@ -41,6 +36,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
       showArrow={true}
       showSearch={true}
       onSearch={(search) => onSearch(search)}
+      onSelect={(val, option) => onSelect && onSelect(option)}
       className={classes}
     />
   );

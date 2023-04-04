@@ -25,7 +25,7 @@ export const userAPI = baseAPI.injectEndpoints({
         method: 'POST'
       })
     }),
-    refresh: builder.query<AuthResponse, undefined>({
+    refresh: builder.query<AuthResponse, void>({
       query: () => ({
         url: `${API_ROUTES.user}/refresh`
       })

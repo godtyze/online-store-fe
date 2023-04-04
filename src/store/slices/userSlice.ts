@@ -3,7 +3,7 @@ import {AuthResponse, UserState} from '@/models/user';
 import {RootState} from '@/store';
 
 const initialState: UserState = {
-  accessToken: '',
+  accessToken: localStorage.getItem('token') || '',
   user: null
 }
 

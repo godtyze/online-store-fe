@@ -1,10 +1,11 @@
 import React from 'react';
+import {Layout} from 'antd';
 
 const Profile: React.FC = () => {
   return (
-    <div>
+    <Layout>
       profile page
-    </div>
+    </Layout>
   );
 };
 

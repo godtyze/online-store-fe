@@ -22,12 +22,6 @@ export const deviceAPI = baseAPI.injectEndpoints({
         url: `${API_ROUTES.device}/${id}`
       })
     }),
-    searchDevices: builder.query<GetDevicesResponse,  Partial<GetDevicesRequest>>({
-      query: (params) => ({
-        url: API_ROUTES.device,
-        params: params
-      })
-    }),
     createDevice: builder.mutation<IDevice, FormData>({
       query: (device) => ({
         url: API_ROUTES.device,
@@ -64,8 +58,6 @@ export const deviceAPI = baseAPI.injectEndpoints({
 export const {
   useGetAllDevicesQuery,
   useLazyGetAllDevicesQuery,
-  useSearchDevicesQuery,
-  useLazySearchDevicesQuery,
   useGetOneDeviceQuery,
   useCreateDeviceMutation,
   useUpdateDeviceMutation,

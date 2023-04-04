@@ -23,7 +23,7 @@ const AppRouter: React.FC = () => {
       </Route>
       <Route path={CLIENT_ROUTES.notFound} element={<NotFound />} />
     </Route>
-  ), {basename: '/online-store-fe'});
+  ), {basename: '/online-store-fe/'});
 
   return (
     <RouterProvider router={router} />

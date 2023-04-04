@@ -1,5 +1,5 @@
 interface ApiErrorResponse {
-  status: number;
+  status: number | string;
   data: {
     message: string;
   }
@@ -16,5 +16,6 @@ export function isApiError(error: unknown): error is ApiErrorResponse {
 }
 
 export function getErrorMessage(error: unknown): string | null {
-  return isApiError(error) ? error.data.message : null;
+  if (!error) return null;
+  return isApiError(error) ? error.data.message : 'Что-то пошло не так, попробуйте еще раз.'
 }
