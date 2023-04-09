@@ -4,7 +4,7 @@ import {IType} from '@/models/type';
 
 export const typeAPI = baseAPI.injectEndpoints({
   endpoints: builder => ({
-    getAllTypes: builder.query<IType[], undefined>({
+    getAllTypes: builder.query<IType[], void>({
       query: () => ({
         url: API_ROUTES.type
       }),

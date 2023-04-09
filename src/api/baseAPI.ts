@@ -10,7 +10,7 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers: Headers, api) => {
     const token = (api.getState() as RootState).userReducer.accessToken;
     if (token) {
-      headers.set('authorization', 'Bearer ' + token);
+      headers.set('authorization', `Bearer ${token}`);
     }
 
     return headers;
@@ -27,8 +27,9 @@ const baseQueryWithReauth: BaseQueryFn<
     const refreshResult = await baseQuery({ url: `${API_ROUTES.user}/refresh`, method: 'GET' }, api, extraOptions);
     if (refreshResult.data) {
       api.dispatch(setCredentials(refreshResult.data as AuthResponse));
-      result = await baseQuery(args, api, extraOptions)
+      result = await baseQuery(args, api, extraOptions);
     } else {
+      await baseQuery({ url: `${API_ROUTES.user}/logout`, method: 'POST' }, api, extraOptions);
       api.dispatch(logOut());
     }
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Layout} from 'antd';
-import SideMenu from '@/components/side-menu';
+import SideMenu from '@/components/side-menu/side-menu';
 
 const Main: React.FC = () => {
   return (

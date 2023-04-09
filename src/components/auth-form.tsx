@@ -3,7 +3,7 @@ import {Button, Card, Form, Input} from 'antd';
 import {useLoginMutation, useRegisterMutation} from '@/api/userAPI';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {CLIENT_ROUTES} from '@/config';
-import {getErrorMessage} from '@/utils';
+import {getErrorMessage, getPath} from '@/utils';
 import {LockOutlined, UserOutlined} from '@ant-design/icons';
 import {LocationState} from '@/models';
 import {useAppDispatch} from '@/hooks/redux';
@@ -14,7 +14,7 @@ const AuthForm: React.FC = () => {
   const dispatch = useAppDispatch()
   const location = useLocation();
   const state = location.state as LocationState;
-  const navigationPath = state && state.from !== CLIENT_ROUTES.login ? state.from : CLIENT_ROUTES.main;
+  const navigationPath = getPath(state);
   const navigate = useNavigate();
   const isLoginPage = location.pathname === CLIENT_ROUTES.login;
   const [email, setEmail] = useState('');
@@ -38,30 +38,30 @@ const AuthForm: React.FC = () => {
     }
   ] = useRegisterMutation();
 
-  let formError: string | null;
+  let formSubmitError: string | null;
   if (isLoginPage) {
-    formError = getErrorMessage(loginError);
+    formSubmitError = getErrorMessage(loginError);
   } else {
-    formError = getErrorMessage(registerError);
+    formSubmitError = getErrorMessage(registerError);
   }
 
-  const onFinish = async () => {
+  const onFinish = () => {
     if (isLoginPage) {
-      await login({email, password});
+       login({email, password});
     } else {
-      await register({email, password});
+      register({email, password});
     }
   };
 
   useEffect(() => {
     if (isLoginSuccess && isLoginPage && loginData) {
       dispatch(setCredentials(loginData));
-      navigate(navigationPath);
+      navigate(navigationPath, {replace: true});
     }
 
     if (isRegisterSuccess && !isLoginPage && registerData) {
       dispatch(setCredentials(registerData));
-      navigate(navigationPath);
+      navigate(navigationPath, {replace: true});
     }
   }, [isLoginPage ? isLoginSuccess : isRegisterSuccess]);
 
@@ -72,7 +72,7 @@ const AuthForm: React.FC = () => {
         onFinish={onFinish}
         size="large"
       >
-        {formError && <div style={{color: 'red', fontSize: '15px'}}>{formError}</div>}
+        {formSubmitError && <div style={{color: 'red', fontSize: '15px'}}>{formSubmitError}</div>}
         <Form.Item
           name="e-mail"
           rules={[
