@@ -3,8 +3,8 @@ import {useLazyRefreshQuery} from '@/api/userAPI';
 import {useAppDispatch, useAppSelector} from '@/hooks/redux';
 import React, {useEffect} from 'react';
 import {selectToken, setCredentials} from '@/store/slices/userSlice';
-import {Row, Spin} from 'antd';
-import './App.scss';
+import Loader from '@/components/ui/loader';
+import './styles/App.scss';
 
 function App() {
   const [refresh, {data, isSuccess, isLoading}] = useLazyRefreshQuery({
@@ -24,7 +24,7 @@ function App() {
   }, [isSuccess]);
 
   if (isLoading) {
-    return <Row justify='center'><Spin size='large'/></Row>
+    return <Loader size='large' className='app center' />
   }
 
   return <AppRouter/>;
