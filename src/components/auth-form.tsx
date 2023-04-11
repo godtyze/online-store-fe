@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Button, Card, Form, Input} from 'antd';
 import {useLoginMutation, useRegisterMutation} from '@/api/userAPI';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
@@ -10,15 +10,19 @@ import {useAppDispatch} from '@/hooks/redux';
 import {setCredentials} from '@/store/slices/userSlice';
 import '@/styles/components/form.scss';
 
+interface FormItems {
+  email: string;
+  password: string;
+}
+
 const AuthForm: React.FC = () => {
+  const [form] = Form.useForm<FormItems>();
   const dispatch = useAppDispatch()
   const location = useLocation();
   const state = location.state as LocationState;
   const navigationPath = getPath(state);
   const navigate = useNavigate();
   const isLoginPage = location.pathname === CLIENT_ROUTES.login;
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [
     login,
     {
@@ -45,7 +49,8 @@ const AuthForm: React.FC = () => {
     formSubmitError = getErrorMessage(registerError);
   }
 
-  const onFinish = () => {
+  const onFinish = (values: FormItems) => {
+    const {email, password} = values;
     if (isLoginPage) {
        login({email, password});
     } else {
@@ -68,13 +73,14 @@ const AuthForm: React.FC = () => {
   return (
     <Card>
       <Form
-        name="auth-form"
+        name='auth-form'
         onFinish={onFinish}
-        size="large"
+        size='large'
+        form={form}
       >
         {formSubmitError && <div style={{color: 'red', fontSize: '15px'}}>{formSubmitError}</div>}
         <Form.Item
-          name="e-mail"
+          name='email'
           rules={[
             {required: true, message: 'E-mail не может быть пустым!'},
             {whitespace: true, message: 'E-mail не может быть пустым!'},
@@ -83,11 +89,9 @@ const AuthForm: React.FC = () => {
           hasFeedback
         >
           <Input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            prefix={<UserOutlined className="site-form-item-icon"/>}
-            placeholder="E-mail"
-            autoComplete="off"
+            prefix={<UserOutlined className='site-form-item-icon'/>}
+            placeholder='E-mail'
+            autoComplete='off'
           />
         </Form.Item>
         <Form.Item
@@ -99,23 +103,21 @@ const AuthForm: React.FC = () => {
           hasFeedback
         >
           <Input.Password
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            prefix={<LockOutlined className="site-form-item-icon"/>}
-            placeholder="Password"
+            prefix={<LockOutlined className='site-form-item-icon'/>}
+            placeholder='Password'
           />
         </Form.Item>
         <Form.Item>
           {isLoginPage
-            ? <span className="form-text">Нет аккаунта? <Link to={CLIENT_ROUTES.registration}>Зарегестрируйтесь!</Link></span>
-            : <span className="form-text">Есть аккаунт? <Link to={CLIENT_ROUTES.login}>Войдите!</Link></span>
+            ? <span className='form-text'>Нет аккаунта? <Link to={CLIENT_ROUTES.registration}>Зарегестрируйтесь!</Link></span>
+            : <span className='form-text'>Есть аккаунт? <Link to={CLIENT_ROUTES.login}>Войдите!</Link></span>
           }
         </Form.Item>
         <Form.Item>
           <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
+            type='primary'
+            htmlType='submit'
+            className='login-form-button'
             loading={isLoginPage ? isLoginLoading : isRegisterLoading}>
             {isLoginPage
               ? 'Войти'
