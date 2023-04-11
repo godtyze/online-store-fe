@@ -32,21 +32,29 @@ export const userAPI = baseAPI.injectEndpoints({
     }),
     getBasketDevices: builder.query<GetDevicesResponse, number>({
       query: (userId) => ({
-        url: `${API_ROUTES.user}/${userId}/basket`,
-      })
+        url: `${API_ROUTES.user}/${userId}/basket`
+      }),
+      providesTags: (result) => result
+        ? [
+          ...result.rows.map(({id}) => ({type: 'BasketDevice' as const, id})),
+          {type: 'BasketDevice', id: 'LIST'}
+        ]
+        : [{type: 'BasketDevice', id: 'LIST'}]
     }),
     addDeviceToBasket: builder.mutation<AuthResponse, DeviceToBasketRequest>({
       query: (req) => ({
         url: `${API_ROUTES.user}/${req.userId}/basket`,
         method: 'POST',
-        body: { deviceId: req.deviceId }
+        body: { deviceId: req.deviceId },
+        invalidatesTags: [{type: 'BasketDevice', id: 'LIST'}]
       })
     }),
     deleteDeviceFromBasket: builder.mutation<AuthResponse, DeviceToBasketRequest>({
       query: (req) => ({
         url: `${API_ROUTES.user}/${req.userId}/basket`,
         method: 'DELETE',
-        body: { deviceId: req.deviceId }
+        body: { deviceId: req.deviceId },
+        invalidatesTags: [{type: 'BasketDevice', id: 'LIST'}]
       })
     })
   })
