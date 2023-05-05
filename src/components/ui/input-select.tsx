@@ -1,4 +1,4 @@
-import React from 'react';
+import {FC} from 'react';
 import {AutoComplete, Spin} from 'antd';
 import cn from 'classnames';
 import {SelectOptions} from '@/models';
@@ -15,7 +15,7 @@ interface InputSelectProps {
   className?: string;
 }
 
-const InputSelect: React.FC<InputSelectProps> = ({
+const InputSelect: FC<InputSelectProps> = ({
                                                    placeholder,
                                                    disabled,
                                                    isLoading,

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect, FC} from 'react';
 import {Button, Card, Form, Input} from 'antd';
 import {useLoginMutation, useRegisterMutation} from '@/api/userAPI';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
@@ -15,7 +15,7 @@ interface FormItems {
   password: string;
 }
 
-const AuthForm: React.FC = () => {
+const AuthForm: FC = () => {
   const [form] = Form.useForm<FormItems>();
   const dispatch = useAppDispatch()
   const location = useLocation();

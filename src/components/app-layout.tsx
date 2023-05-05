@@ -1,9 +1,9 @@
-import React from 'react';
+import {FC} from 'react';
 import Header from '@/components/header/header';
 import {Outlet} from 'react-router-dom';
 import Footer from '@/components/footer';
 
-const AppLayout: React.FC = () => {
+const AppLayout: FC = () => {
   return (
     <div className="app">
       <Header/>

@@ -1,7 +1,7 @@
-import React from 'react';
+import {FC} from 'react';
 import {Layout} from 'antd';
 
-const Profile: React.FC = () => {
+const Profile: FC = () => {
   return (
     <Layout>
       profile page

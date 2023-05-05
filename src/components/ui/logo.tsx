@@ -1,7 +1,7 @@
-import React from 'react';
+import {FC} from 'react';
 import styles from '@/styles/ui/logo.module.scss';
 
-const Logo = () => {
+const Logo: FC = () => {
   return (
     <h1 className={styles.logo}>
       <span>ONLINE</span>

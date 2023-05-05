@@ -1,7 +1,7 @@
 import AppRouter from '@/components/app-router';
 import {useLazyRefreshQuery} from '@/api/userAPI';
 import {useAppDispatch, useAppSelector} from '@/hooks/redux';
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {selectToken, setCredentials} from '@/store/slices/userSlice';
 import Loader from '@/components/ui/loader';
 import './styles/App.scss';
@@ -24,7 +24,7 @@ function App() {
   }, [isSuccess]);
 
   if (isLoading) {
-    return <Loader size='large' className='app center' />
+    return <Loader size='large' wrapperClassName='app center' />
   }
 
   return <AppRouter/>;

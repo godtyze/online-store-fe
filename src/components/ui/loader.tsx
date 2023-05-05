@@ -1,22 +1,19 @@
-import React from 'react';
-import {Row, Spin} from 'antd';
+import {FC} from 'react';
+import {Row, Spin, SpinProps} from 'antd';
 import cnBind from 'classnames/bind';
 import styles from '@/styles/ui/loader.module.scss';
 
-interface LoaderProps {
-  size?: 'small' | 'large' | 'default';
+interface LoaderProps extends SpinProps {
+
   isCenter?: boolean;
-  className?: string;
 }
 
 const cx = cnBind.bind(styles);
 
-const Loader: React.FC<LoaderProps> = ({size, isCenter, className}) => {
-  const classes = cx(className, {
+const Loader: FC<LoaderProps> = ({size, isCenter, wrapperClassName}) => {
+  const classes = cx(wrapperClassName, {
     [styles.container]: isCenter
   });
-
-  console.log(classes)
 
   if (isCenter) {
     return (

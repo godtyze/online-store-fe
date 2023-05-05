@@ -1,10 +1,11 @@
-import React from 'react';
+import {FC} from 'react';
+import {Layout} from 'antd';
 
-const NotFound = () => {
+const NotFound: FC = () => {
   return (
-    <div>
+    <Layout>
       not found page
-    </div>
+    </Layout>
   );
 };
 

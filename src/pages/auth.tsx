@@ -1,4 +1,4 @@
-import React from 'react';
+import {FC} from 'react';
 import {Layout, Row} from 'antd';
 import AuthForm from '@/components/auth-form';
 import {useLocation, useNavigate} from 'react-router-dom';
@@ -8,7 +8,7 @@ import {LocationState} from '@/models';
 import {getPath} from '@/utils';
 import '@/styles/pages/auth.scss';
 
-const Auth: React.FC = () => {
+const Auth: FC = () => {
   const user = useAppSelector(selectUser);
   const location = useLocation();
   const state = location.state as LocationState;

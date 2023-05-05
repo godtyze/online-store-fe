@@ -1,10 +1,10 @@
-import React from 'react';
+import {FC} from 'react';
 import {useAppSelector} from '@/hooks/redux';
 import {selectUser} from '@/store/slices/userSlice';
 import {Navigate, Outlet, useLocation} from 'react-router-dom';
 import {CLIENT_ROUTES} from '@/config';
 
-const RequireAuth: React.FC = () => {
+const RequireAuth: FC = () => {
   const user = useAppSelector(selectUser);
   const location = useLocation();
 

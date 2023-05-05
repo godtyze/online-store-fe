@@ -1,10 +1,11 @@
-import React from 'react';
+import {FC} from 'react';
+import {Layout} from 'antd';
 
-const Device = () => {
+const Device: FC = () => {
   return (
-    <div>
+    <Layout>
       device page
-    </div>
+    </Layout>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import {FC} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Button, Row} from 'antd';
 import {useAppSelector} from '@/hooks/redux';
@@ -8,7 +8,7 @@ import {ShoppingCartOutlined} from '@ant-design/icons';
 import {CLIENT_ROUTES} from '@/config';
 import '@/styles/components/user-bar.scss';
 
-const UserBar: React.FC = () => {
+const UserBar: FC = () => {
   const user = useAppSelector(selectUser);
   const navigate = useNavigate();
 

@@ -14,5 +14,5 @@ export const enum CLIENT_ROUTES {
   device = '/device/:id',
   profile = '/profile',
   cart = '/cart',
-  notFound = '*'
+  notFound = '/404'
 }
